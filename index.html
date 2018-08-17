@@ -1,32 +1,25 @@
 <!DOCTYPE html>
+<html lang="en-us">
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>WebAssembly Example</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="styles.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Unity WebGL Player | Tanks!</title>
+    <link rel="shortcut icon" href="TemplateData/favicon.ico">
+    <link rel="stylesheet" href="TemplateData/style.css">
+    <script src="TemplateData/UnityProgress.js"></script>  
+    <script src="Build/UnityLoader.js"></script>
+    <script>
+      var gameInstance = UnityLoader.instantiate("gameContainer", "Build/tanks.json", {onProgress: UnityProgress});
+    </script>
   </head>
   <body>
-
-    <div class="dice dice-6"></div>
-    <span>Click Dice To Roll</span>    
-
-    <!-- Include the JavaScript glue code. -->
-    <!-- This will load the WebAssembly module and run its main. --> 
-    <script src="index.js"></script>
-    <script>
-
-      // When a HTML dice is clicked, it's value will change.
-      var dice = document.querySelector('.dice');
-
-      dice.addEventListener('click', function(){
-        
-        // Make a call to the roll_dice function from the C code.
-        var result = _roll_dice();
-        dice.className = "dice dice-" + result;                   
-
-      });
-    </script>
-   
+    <div class="webgl-content">
+      <div id="gameContainer" style="width: 1280px; height: 720px"></div>
+      <div class="footer">
+        <div class="webgl-logo"></div>
+        <div class="fullscreen" onclick="gameInstance.SetFullscreen(1)"></div>
+        <div class="title">Tanks!</div>
+      </div>
+    </div>
   </body>
-</html> 
+</html>
