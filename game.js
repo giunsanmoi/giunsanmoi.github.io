@@ -167,7 +167,68 @@ function Program(){
 }
 
 
+function start_game(){
+	setInterval(game , 10);
+}
 
+game = function autogame(){	
+	a = document.getElementById('main-frame-error')
+	b = a.children[3]
+	c = b.children[0]
+	d = c.getContext('2d')
+	e = d.getImageData(110,90,1,30).data
+	
+	for(i = 0; i < 120; i++){
+		if(e[i] > 0){
+			move(1,10);			
+			break;
+		}		
+	}
+	
+}
+function move(move, timeout) {
+        switch (move) {
+            case 1:
+                if (!timeout) {
+                    timeout = 85;
+                }
+
+                issueKeyPress('keydown', 38);
+                //setTimeout(function() {
+                //    issueKeyPress('keyup', 38);
+                //}, timeout);
+                break;
+
+            case 2:
+                if (!timeout) {
+                    timeout = 200;
+                }
+
+                issueKeyPress('keydown', 40);
+                //setTimeout(function() {
+                //    issueKeyPress('keyup', 40);
+                //}, timeout);
+                break;
+
+            default:
+                console.log('Invalid move ' + move);
+        }
+    }
+
+function issueKeyPress(type, keycode) {
+        var eventObj = document.createEventObject ?
+            document.createEventObject() : document.createEvent("Events");
+
+        if(eventObj.initEvent){
+            eventObj.initEvent(type, true, true);
+        }
+
+        eventObj.keyCode = keycode;
+        eventObj.which = keycode;
+
+        document.dispatchEvent ? document.dispatchEvent(eventObj) : el.fireEvent("onkeydown", eventObj);
+
+    }
 
 /*
 var xRef = par.child('x');
